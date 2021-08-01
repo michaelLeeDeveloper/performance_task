@@ -42,6 +42,26 @@ const MaterialUserTable: FC<Props> = ({ users, options }: Props) => {
     return (
         <>
             {showForm && <UserForm user={currentUser} toggleForm={toggleForm} options={options} />}
+            {showModal ?
+                <div className="modal-modal show">
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Are you sure you want to delete {currentUser.first_name} {currentUser.last_name}</h5>
+
+                                <button type="button" className="btn close" onClick={toggleModal}
+                                    aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" onClick={toggleModal}>Go Back</button>
+                                <button type="button" className="btn btn-danger" onClick={() => handleDeleteUser(currentUser.key)}>Yes, Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div >
+                : <></>}
             <MaterialTable
                 title=""
                 columns={[
@@ -89,26 +109,7 @@ const MaterialUserTable: FC<Props> = ({ users, options }: Props) => {
                 }}
                 style={{ zIndex: 0 }}
             />
-            {showModal ?
-                <div className="modal-modal show">
-                    <div className="modal-dialog modal-dialog-centered" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">Are you sure you want to delete {currentUser.first_name} {currentUser.last_name}</h5>
 
-                                <button type="button" className="btn close" onClick={toggleModal}
-                                    aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" onClick={toggleModal}>Go Back</button>
-                                <button type="button" className="btn btn-danger" onClick={() => handleDeleteUser(currentUser.key)}>Yes, Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div >
-                : <></>}
         </>
     );
 };

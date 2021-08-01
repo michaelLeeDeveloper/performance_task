@@ -39,8 +39,12 @@ const NewUserForm: React.FC<Props> = ({ options }: Props) => {
     };
 
     const handleSave = (newUser: string) => {
-        setshowForm(!showForm);
-        addUser(newUser);
+        if (formValues.first_name && formValues.last_name && formValues.email) {
+            setshowForm(!showForm);
+            addUser(newUser);
+        } else {
+            alert("First Name, Last Name and E-mail are required.");
+        }
     };
 
     const handleChange = (evt: ChangeEvent) => {
@@ -50,7 +54,12 @@ const NewUserForm: React.FC<Props> = ({ options }: Props) => {
                 [(evt.target! as HTMLInputElement).name]: (evt.target! as HTMLInputElement).checked
             });
         } else {
-            setFormValues({
+            if ((evt.target! as HTMLInputElement).name === "middle_initial") {
+                setFormValues({
+                    ...formValues,
+                    [(evt.target! as HTMLInputElement).name]: (evt.target! as HTMLInputElement).value.toUpperCase()
+                });
+            } else setFormValues({
                 ...formValues,
                 [(evt.target! as HTMLInputElement).name]: (evt.target! as HTMLInputElement).value
             });
@@ -99,7 +108,7 @@ const NewUserForm: React.FC<Props> = ({ options }: Props) => {
                                         <label className="col-3 col-form-label" htmlFor="middle_initial">Middle Initial</label>
                                         <div className="col-9">
                                             <input className="form-control" id="middleInitial" type="text" name="middle_initial"
-                                                placeholder="Middle Initial" value={formValues.middle_initial} pattern="^[A-Z]$" title="Middle Initial"
+                                                placeholder="Middle Initial" value={formValues.middle_initial} pattern="^[A-Za-z]$" title="Middle Initial"
                                                 onChange={handleChange} />
                                         </div>
                                     </div>

@@ -83,13 +83,14 @@ const UserForm: FC<Props> = (props: Props) => {
                             <div className="form-group row">
                                 <label className="col-3 col-form-label" htmlFor="middle_initial">Middle Initial</label>
                                 <div className="col-9">
-                                    <input className="form-control" id="middleInitial" type="text" name="middle_initial" placeholder={(user.middle_initial != null) ? user.middle_initial : "M.I."} value={(user.middle_initial != null) ? user.middle_initial : undefined} pattern="^[A-Z]$" title="Middle Initial" onChange={e => setUserData({ ...userData, [e.target.name]: e.target.value.toUpperCase() })} />
+                                    <input className="form-control" id="middleInitial" type="text" name="middle_initial" placeholder={(user.middle_initial != null) ? user.middle_initial : "M.I."} value={(userData.middle_initial != null) ? userData.middle_initial : undefined} pattern="^[A-Za-z]$" title="Middle Initial" onChange={e => setUserData({ ...userData, [e.target.name]: e.target.value.toUpperCase() })} />
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label className="col-3 col-form-label" htmlFor="email">E-Mail</label>
                                 <div className="col-9">
-                                    <input className="form-control" required id="email" type="email" name="email" value={userData.email} placeholder={user.email} title="Email" onChange={e => setUserData({ ...userData, [e.target.name]: e.target.value })} />
+                                    <input className="form-control" required id="email" type="email" name="email" value={userData.email} placeholder={user.email} onChange={e => setUserData({ ...userData, [e.target.name]: e.target.value })} />
+
                                 </div>
                             </div>
                             <div className="form-group row">
