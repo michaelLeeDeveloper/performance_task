@@ -1,0 +1,8 @@
+.modal-modal {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #494964;
+    z-index: 3;
+}

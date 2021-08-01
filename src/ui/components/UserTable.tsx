@@ -1,66 +1,52 @@
 import React from 'react';
-import Filter from './Filter';
+import UserTableRow from './UserTableRow';
+import { v4 as uuidv4 } from 'uuid';
+import { Table } from "react-bootstrap";
 
-const UserTable: React.FC = () => {
+type Props = { users: { "id": number, "first_name": string, key: string, "last_name": string, "email": string, "verified": boolean, "middle_initial": string | null, "created_at": Date, "district": number, "active": boolean, isEditing: boolean | void }[], options: Option[] };
+interface Option {
+    value: number,
+    label: string
+}
+const UserTable: React.FC<Props> = ({ users, options }: Props) => {
 
-    const handleEditUser = () => {
-        console.log('');
-    };
 
-    const handleDeleteUser = () => {
-        console.log('');
-    };
+
+    interface User { "id": number, key: string, "first_name": string, "last_name": string, "email": string, "verified": boolean, "middle_initial": string | null, "created_at": Date, "district": number, "active": boolean, isEditing: boolean | void }
+
+    console.log(users);
+
+    const renderUserListItems = () => users.map((user: User) => {
+        const keyUUID = uuidv4();
+        return (
+            <tr key={keyUUID}>
+                <UserTableRow user={user} key={keyUUID} />
+            </tr>
+        );
+    });
+
 
     return (
-        <div className="admin-user-table" style={{marginTop: '7rem'}}>
-            <Filter />
-            
-            <div style={{border: '1px solid black', width: '50rem', marginTop: '2rem'}}>
-                <h2 style={{textAlign: 'center', textDecoration: 'underline'}}>Users</h2>
-                <ul style={{listStyle: 'none', paddingLeft: 0, height: '30rem'}}>
-                    <li style={{fontWeight: 700, borderBottom: '2px solid black', marginBottom: '1rem', padding: '1rem'}}>
-                        <div style={{display: 'flex', justifyContent: 'space-evenly', textAlign: 'center'}}>
-                            <div style={{width: '5%'}}>ID</div>
-                            <div style={{width: '20%'}}>Last Name</div>
-                            <div style={{width: '20%'}}>First Name</div>
-                            <div style={{width: '5%'}}>M.I.</div>
-                            <div style={{width: '20%'}}>District</div>
-                            <div style={{width: '10%'}}>Verified</div>
-                            <div style={{width: '20%'}}>Created</div>
-                        </div>
-                    </li>
-                    <li style={{marginBottom: '2rem', background: '#fff', border: '1px solid black', padding: '1rem'}}>
-                        <div style={{display: 'flex', justifyContent: 'space-evenly', textAlign: 'center', marginBottom: '0.5rem'}}>
-                            <div style={{width: '5%'}}>108</div>
-                            <div style={{width: '20%'}}>Smith</div>
-                            <div style={{width: '20%'}}>Robert</div>
-                            <div style={{width: '5%'}}>J</div>
-                            <div style={{width: '20%'}}>Cure District</div>
-                            <div style={{width: '10%'}}>True</div>
-                            <div style={{width: '20%'}}>June 18, 2020</div>
-                        </div>
-                        <div style={{marginLeft: 'auto', width: '10rem', display: 'flex', justifyContent: 'space-between', paddingRight: '2rem'}}>
-                            <button type="button">Edit</button>
-                            <button type="button">Delete</button>
-                        </div>
-                    </li>
-                    <li style={{marginBottom: '2rem', background: '#fff', border: '1px solid black', padding: '1rem'}}>
-                        <div style={{display: 'flex', justifyContent: 'space-evenly', textAlign: 'center', marginBottom: '0.5rem'}}>
-                            <div style={{width: '5%'}}>142</div>
-                            <div style={{width: '20%'}}>Morrissey</div>
-                            <div style={{width: '20%'}}>Steven</div>
-                            <div style={{width: '5%'}}>P</div>
-                            <div style={{width: '20%'}}>Cure District</div>
-                            <div style={{width: '10%'}}>True</div>
-                            <div style={{width: '20%'}}>June 18, 2020</div>
-                        </div>
-                        <div style={{marginLeft: 'auto', width: '10rem', display: 'flex', justifyContent: 'space-between', paddingRight: '2rem'}}>
-                            <button type="button">Edit</button>
-                            <button type="button">Delete</button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <div className="admin-user-table ">
+            <h2 className="text-center my-5">Users</h2>
+            <Table striped bordered hover responsive>
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">M. I.</th>
+                        <th scope="col">District</th>
+                        <th scope="col">Verified</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Date Added</th>
+                        <th scope="col">Admin Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {renderUserListItems()}
+                </tbody>
+            </Table>
         </div>
     );
 };

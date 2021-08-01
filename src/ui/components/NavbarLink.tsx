@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NavbarLink = ({text}: {text: string}): JSX.Element => {
+const NavbarLink = ({ text }: { text: string }): JSX.Element => {
 
     return (
         <li className='nav-item'>

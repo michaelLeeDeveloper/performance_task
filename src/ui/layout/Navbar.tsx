@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NavbarLink from '../components/NavbarLink';
 import '../stylesheets/navbar.css';
 
@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
         <nav className="navbar navbar-dark nav-main">
             <div className="container">
                 <a className="navbar-brand">inquirED</a>
-                <i id="loading-icon" className="fas fa-cog fa-spin fa-2x loading-icon" title="Loading..." style={{display: "none"}}></i>
+                <i id="loading-icon" className="fas fa-cog fa-spin fa-2x loading-icon" title="Loading..." style={{ display: "none" }}></i>
 
                 <ul className="navbar-nav">
                     <NavbarLink text="Admin Panel" />
@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
                         <a className="nav-link dropdown-toggle text-lowercase text-capitalize" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Admin
 
-                            <div className="avatar avatar-sm" style={{position:"relative"}}>
+                            <div className="avatar avatar-sm" style={{ position: "relative" }}>
                                 A
                             </div>
                         </a>
